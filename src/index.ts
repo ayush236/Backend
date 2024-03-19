@@ -5,7 +5,7 @@ import { AppDataSource } from "./data-source"
 import { Routes } from "./routes"
 import { User } from "./entity/User"
 import *  as morgan from "morgan"
-import studentroutes from './Routes/student.routes'
+import studentroutes from './routes/student.routes'
 import * as cors from 'cors'
 import { AppError } from "./utils/AppError"
 import { error } from "console"
@@ -18,28 +18,28 @@ AppDataSource.initialize().then(async () => {
     app.use(morgan("dev"))
 
     // register express routes from defined application routes
-   
 
-app.use(cors({origin:'*'}))
 
-    app.get("/",(req :Request,res : Response , next:NextFunction)=>{
-        res.json({message: "ayush"})
-       })
-    app.use ('/student',studentroutes)
+    app.use(cors({ origin: '*' }))
+
+    app.get("/", (req: Request, res: Response, next: NextFunction) => {
+        res.json({ message: "ayush" })
+    })
+    app.use('/student', studentroutes)
 
     //all handle routes
     // app.use('/doc',swaggerUiExpress.serve,swaggerUiExpress.setup(swaggerFile))
 
-    app.all('*',(req:Request, res:Response, next:NextFunction)=>{
-        next(new AppError(404,`${req.originalUrl} Notfound`))
+    app.all('*', (req: Request, res: Response, next: NextFunction) => {
+        next(new AppError(404, `${req.originalUrl} Notfound`))
     })
 
-    app.use((error:AppError, req:Request, res:Response, next:NextFunction)=>{
-        error.status=error.status||'error';
-        error.statuscode=error.statuscode||500;
+    app.use((error: AppError, req: Request, res: Response, next: NextFunction) => {
+        error.status = error.status || 'error';
+        error.statuscode = error.statuscode || 500;
         res.status(error.statuscode).json({
-            status:error.status,
-            message:error.message
+            status: error.status,
+            message: error.message
         })
     })
 
@@ -50,7 +50,7 @@ app.use(cors({origin:'*'}))
     app.listen(3000)
 
     // insert new users for test
-   
+
     console.log("Express server has started on port 3000. Open http://localhost:3000/users to see results")
 
 }).catch(error => console.log(error))
