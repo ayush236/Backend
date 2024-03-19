@@ -18,12 +18,13 @@
       "pg": "^8.4.0",
       "reflect-metadata": "^0.1.13",
       "swagger-autogen": "^2.23.7",
+      "swagger-ui-express": "^5.0.0",
       "typeorm": "0.3.20"
    },
    "scripts": {
       "start": "ts-node src/index.ts",
       "dev": "nodemon -w *ts src/index.ts",
-      "swagger":"nod:/swagger.js",
+      "swagger": "node src/swagger.js",
       "typeorm": "typeorm-ts-node-commonjs"
    }
 }

@@ -75,13 +75,14 @@ export const deletedata=async (req:Request, res:Response, next:NextFunction)=>{
       if(!Data){
         return next(new AppError(404,"data doesn't exist"))
       }
-      await StudentRepo.remove(Data).then(result=>{
+      await StudentRepo.softRemove(Data).then(result=>{
         res.status(200).json({
             message:"student data has been fetch successfully",
             data:result
         })
     }).catch(error=>{
         next(new AppError(400,"error"))
+        
     })
         
     }

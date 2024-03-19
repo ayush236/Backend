@@ -1,4 +1,5 @@
-import swaggerAutogen from 'swagger-autogen'
+// import swaggerAutogen from 'swagger-autogen'
+const swaggerAutogen =require("swagger-autogen") ()
 
 const doc={
     info:{
@@ -8,6 +9,7 @@ const doc={
     host:'localhost:3000'
 }
 const outputfile='./swagger-outputfile.json'
-const routes =['./routes/student.routes.ts']
+const routes= ['./Routes/Students.Routes']
 
-swaggerAutogen()(outputfile,routes,doc)
+
+swaggerAutogen(outputfile,routes,doc)
