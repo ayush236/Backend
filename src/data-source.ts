@@ -4,16 +4,18 @@ import { User } from "./entity/User"
 import { employe } from "./entity/employe"
 import { Student } from "./entity/student"
 
+
+// TODO: change this according to need
 export const AppDataSource = new DataSource({
     type: "mysql",
     host: "localhost",
     port: 3306,
-    username: "root",
-    password: "9818430363ayush",
-    database: "traning",
+    username: "mysql",
+    password: "defaultMySql",
+    database: "khatriAyush",
     synchronize: true,
     logging: false,
-    entities: [User,employe,Student],
+    entities: [User, employe, Student],
     migrations: [],
     subscribers: [],
 })
