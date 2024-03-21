@@ -1,18 +1,21 @@
 {
-  "swagger": "2.0",
+  "openapi": "3.0.0",
   "info": {
     "title": "API training",
     "description": "Description",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
-  "basePath": "/",
-  "schemes": [
-    "http"
+  "servers": [
+    {
+      "url": "http://localhost:3000/"
+    }
   ],
   "paths": {
-    "/": {
+    "/student": {
       "get": {
+        "tags": [
+          "Student"
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -23,10 +26,23 @@
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/studentSchema"
+              }
+            }
           }
         }
       },
       "post": {
+        "tags": [
+          "Student"
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -38,18 +54,152 @@
           "500": {
             "description": "Internal Server Error"
           }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/studentSchema"
+              }
+            }
+          }
         }
       }
     },
-    "/{id}": {
+    "/student/{id}": {
       "get": {
+        "tags": [
+          "Student"
+        ],
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/studentSchema"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Student"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/studentSchema"
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Student"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/studentSchema"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Teacher/": {
+      "get": {
+        "tags": [
+          "Teacher"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Teacher"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Teacher/{id}": {
+      "get": {
+        "tags": [
+          "Teacher"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -59,13 +209,18 @@
         }
       },
       "delete": {
+        "tags": [
+          "Teacher"
+        ],
         "description": "",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -73,6 +228,62 @@
             "description": "OK"
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "Teacher"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "studentSchema": {
+        "type": "object",
+        "properties": {
+          "firstname": {
+            "type": "string",
+            "example": "kale "
+          },
+          "lastname": {
+            "type": "string",
+            "example": "don"
+          },
+          "age": {
+            "type": "number",
+            "example": 30
+          }
+        },
+        "required": [
+          "firstname",
+          "lastname"
+        ]
+      }
+    },
+    "examples": {
+      "studentExample": {
+        "value": {
+          "firstname": "kale ",
+          "lastname": "don",
+          "age": 30
+        },
+        "summary": "studentdata"
       }
     }
   }

@@ -6,10 +6,13 @@ import { Routes } from "./routes"
 import { User } from "./entity/User"
 import *  as morgan from "morgan"
 import studentroutes from './routes/student.routes'
+import TeacherRoutes from './routes/teacher.routes'
 import * as cors from 'cors'
 import { AppError } from "./utils/AppError"
 import { error } from "console"
-// import * as swaggerFile from './swagger-outputfile.json'
+import * as swaggerFile from './swagger-outputfile.json'
+import * as swaggerUiExpress from 'swagger-ui-express'
+
 AppDataSource.initialize().then(async () => {
 
     // create express app
@@ -25,10 +28,10 @@ AppDataSource.initialize().then(async () => {
     app.get("/", (req: Request, res: Response, next: NextFunction) => {
         res.json({ message: "ayush" })
     })
-    app.use('/student', studentroutes)
-
+    app.use(studentroutes)
+    app.use(TeacherRoutes)
     //all handle routes
-    // app.use('/doc',swaggerUiExpress.serve,swaggerUiExpress.setup(swaggerFile))
+    app.use('/doc',swaggerUiExpress.serve,swaggerUiExpress.setup(swaggerFile))
 
     app.all('*', (req: Request, res: Response, next: NextFunction) => {
         next(new AppError(404, `${req.originalUrl} Notfound`))
