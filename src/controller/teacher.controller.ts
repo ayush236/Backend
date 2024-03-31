@@ -5,6 +5,7 @@ import { json } from "stream/consumers";
 import { AppError } from "../utils/AppError";
 import { RequestListener } from "http";
 import { error } from 'console';
+import { put } from "@vercel/blob";
 
 const TeacherRepo =AppDataSource.getRepository(teacher)
 //#swagger.tags=['Teacher]
@@ -45,7 +46,9 @@ export const postdata= async(req:Request,res:Response,next:NextFunction)=>{
         */
 
     try{
-        console.log(req.body)
+        const urls = await put(req.file.originalname,req.file.buffer, {access: 'public',token:"vercel_blob_rw_IL0cZNrkthPhPF4L_VsgB6bmHZoilN4ySKHc79ntBv1tEdq" });
+        console.log(req.body,req.file,urls)
+        req.body.profile=urls.url
         await TeacherRepo.save(req.body).then(result=>{
             res.status(200).json({
                 message:"Data has been posted successfully",
@@ -63,6 +66,7 @@ export const postdata= async(req:Request,res:Response,next:NextFunction)=>{
 }
 export const getsingledata=async(req:Request,res:Response,next:NextFunction)=>{
      //#swagger.tags=['Teacher']
+     
     try{
         await TeacherRepo.findOneBy({id:req.params.id}).then(result=>{
             res.status(200).json({
@@ -79,6 +83,20 @@ export const getsingledata=async(req:Request,res:Response,next:NextFunction)=>{
 }
 export const deletedata=async(req:Request,res:Response,next:NextFunction)=>{
      //#swagger.tags=['Teacher']
+     /* #swagger.requestBody = {
+                required:true,
+                content:{
+                    "multipart/form-data":{
+                        schema:{
+                                $ref:"#/components/schemas/teacherSchema"
+                        }
+              
+
+                    }
+                }
+                
+            }
+        */
     try{
         console.log(req.params)
         let Data= await TeacherRepo.findOneBy({id:req.params.id})

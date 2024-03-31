@@ -27,16 +27,6 @@
           "500": {
             "description": "Internal Server Error"
           }
-        },
-        "requestBody": {
-          "required": true,
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/studentSchema"
-              }
-            }
-          }
         }
       },
       "post": {
@@ -86,16 +76,6 @@
         "responses": {
           "200": {
             "description": "OK"
-          }
-        },
-        "requestBody": {
-          "required": true,
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/studentSchema"
-              }
-            }
           }
         }
       },
@@ -183,6 +163,16 @@
           "200": {
             "description": "OK"
           }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/teacherSchema"
+              }
+            }
+          }
         }
       }
     },
@@ -226,6 +216,16 @@
         "responses": {
           "200": {
             "description": "OK"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/teacherSchema"
+              }
+            }
           }
         }
       },
@@ -274,6 +274,27 @@
           "firstname",
           "lastname"
         ]
+      },
+      "teacherSchema": {
+        "type": "object",
+        "properties": {
+          "firstname": {
+            "type": "string",
+            "example": "salman "
+          },
+          "lastname": {
+            "type": "string",
+            "example": "khan"
+          },
+          "age": {
+            "type": "number",
+            "example": 55
+          }
+        },
+        "required": [
+          "firstname",
+          "lastname"
+        ]
       }
     },
     "examples": {
@@ -284,6 +305,14 @@
           "age": 30
         },
         "summary": "studentdata"
+      },
+      "teacherExample": {
+        "value": {
+          "firstname": "salman ",
+          "lastname": "khan",
+          "age": 55
+        },
+        "summary": "teacherdata"
       }
     }
   }

@@ -4,7 +4,10 @@ import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedCol
 
 export class teacher{
     @PrimaryGeneratedColumn()
-    id:number
+    id:string
+
+    @Column({nullable:true})
+    profile:string
 
     @Column()
     firstname:string

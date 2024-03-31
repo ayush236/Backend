@@ -7,6 +7,7 @@ import { User } from "./entity/User"
 import *  as morgan from "morgan"
 import studentroutes from './routes/student.routes'
 import TeacherRoutes from './routes/teacher.routes'
+import  newuserRoutes  from "./routes/newuser.routes"
 import * as cors from 'cors'
 import { AppError } from "./utils/AppError"
 import { error } from "console"
@@ -19,6 +20,7 @@ AppDataSource.initialize().then(async () => {
     const app = express()
     app.use(bodyParser.json())
     app.use(morgan("dev"))
+    app.use('/public',express.static('src/public'))
 
     // register express routes from defined application routes
 
@@ -30,8 +32,10 @@ AppDataSource.initialize().then(async () => {
     })
     app.use(studentroutes)
     app.use(TeacherRoutes)
+    app.use(newuserRoutes)
     //all handle routes
     app.use('/doc',swaggerUiExpress.serve,swaggerUiExpress.setup(swaggerFile))
+    
 
     app.all('*', (req: Request, res: Response, next: NextFunction) => {
         next(new AppError(404, `${req.originalUrl} Notfound`))

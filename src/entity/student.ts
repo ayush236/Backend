@@ -5,6 +5,9 @@ export class Student{
     @PrimaryGeneratedColumn('uuid')
     id:string
 
+    @Column({nullable:true})
+    profile:string
+
     @Column()
     firstname:string
 
@@ -13,6 +16,7 @@ export class Student{
 
     @Column()
     age:number
+     
 
 @DeleteDateColumn()
 deletedate:Date
