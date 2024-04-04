@@ -3,14 +3,14 @@
         "version": 2,
         "builds": [
           {
-            "src": "index.ts",
+            "src": "builds/index.js",
             "use": "@now/node"
           }
         ],
         "routes": [
           {
             "src": "/(.*)",
-            "dest": "index.ts",
+            "dest": "src/index.js",
             "methods":[
                 "GET","POST","PATCH","DELETE"
             ]

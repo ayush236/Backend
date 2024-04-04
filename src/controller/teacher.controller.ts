@@ -6,14 +6,20 @@ import { AppError } from "../utils/AppError";
 import { RequestListener } from "http";
 import { error } from 'console';
 import { put } from "@vercel/blob";
+import { Student } from '../entity/student';
 
 const TeacherRepo =AppDataSource.getRepository(teacher)
+const StudentRepo =AppDataSource.getRepository(Student)
 //#swagger.tags=['Teacher]
 
 export const  getdata =async(req:Request,res:Response,next:NextFunction)=>{
     //#swagger.tags=['Teacher']
     try{
-        await TeacherRepo.find().then(result=>{
+        await TeacherRepo.find({
+            relations:{
+                student:true
+            }
+        }).then(result=>{
             res.status(200).json({
                 message:"Data has been fetch successfully",
                 data:result
@@ -46,9 +52,11 @@ export const postdata= async(req:Request,res:Response,next:NextFunction)=>{
         */
 
     try{
-        const urls = await put(req.file.originalname,req.file.buffer, {access: 'public',token:"vercel_blob_rw_IL0cZNrkthPhPF4L_VsgB6bmHZoilN4ySKHc79ntBv1tEdq" });
-        console.log(req.body,req.file,urls)
-        req.body.profile=urls.url
+        // const urls = await put(req.file.originalname,req.file.buffer, {access: 'public',token:"vercel_blob_rw_IL0cZNrkthPhPF4L_VsgB6bmHZoilN4ySKHc79ntBv1tEdq" });
+        // console.log(req.body,req.file,urls)
+        // req.body.profile=urls.url
+        let student = await StudentRepo.findOneBy({id:req.body.student})
+        req.body.student=student
         await TeacherRepo.save(req.body).then(result=>{
             res.status(200).json({
                 message:"Data has been posted successfully",
@@ -128,10 +136,10 @@ export const updatedata=async(req:Request,res:Response,next:NextFunction)=>{
             return next(new AppError(400,'this data is does not exist'))
         }
         Object.assign(data,req.body)
-        await TeacherRepo.save(data).then(error=>{
+        await TeacherRepo.save(data).then(result=>{
             res.status(200).json({
                 message:"Data has been updated as your request",
-                result:data
+                data:result
             })
         }).catch(error=>{
             next (new AppError(400,"error"))

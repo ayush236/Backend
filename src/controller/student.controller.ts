@@ -11,11 +11,20 @@ import { send } from 'process'
 
 const StudentRepo =AppDataSource.getRepository(Student)
 // #swagger.tags=['Student']
-export const getdata=async (req:Request, res:Response, next:NextFunction)=>{
+interface RequestCustom extends Request{
+    user:any;
+}
+export const getdata=async (req:RequestCustom, res:Response, next:NextFunction)=>{
     // #swagger.tags=['Student']
    
     try{
-        await StudentRepo.find().then(result=>{
+        
+        console.log(req.user)
+        await StudentRepo.find({
+            relations:{
+                employe:true
+            }
+        }).then(result=>{
             res.status(200).json({
                 message:"student data has been fetch successfully",
                 data:result
@@ -53,10 +62,11 @@ export const postdata=async (req:Request, res:Response, next:NextFunction)=>{
         */       
     try{
 
-const urls = await put(req.file.originalname,req.file.buffer, { access: 'public',token:"vercel_blob_rw_IL0cZNrkthPhPF4L_VsgB6bmHZoilN4ySKHc79ntBv1tEdq" });
-        console.log(req.body,req.files,urls)
-        req.body.profile=urls.url
+// const urls = await put(req.file.originalname,req.file.buffer, { access: 'public',token:"vercel_blob_rw_IL0cZNrkthPhPF4L_VsgB6bmHZoilN4ySKHc79ntBv1tEdq" });
+//         console.log(req.body,req.files,urls)
+//         req.body.profile=urls.url
 
+req.body.employe=[req.body.employe]
         await StudentRepo.save(req.body).then(result=>{
             const message = " hello world "
             const option ={
@@ -75,6 +85,7 @@ const urls = await put(req.file.originalname,req.file.buffer, { access: 'public'
                 data:result
             })
         }).catch(error=>{
+            console.log(error)
             res.status(400).json({
                 message:"somthing went while posting data",
                 error:error

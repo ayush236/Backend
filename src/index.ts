@@ -8,11 +8,14 @@ import *  as morgan from "morgan"
 import studentroutes from './routes/student.routes'
 import TeacherRoutes from './routes/teacher.routes'
 import  newuserRoutes  from "./routes/newuser.routes"
+import employeRoutes from "./routes/employe.routes"
 import * as cors from 'cors'
 import { AppError } from "./utils/AppError"
 import { error } from "console"
 import * as swaggerFile from './swagger-outputfile.json'
 import * as swaggerUiExpress from 'swagger-ui-express'
+import libraryRoutes from "./routes/libray.routes"
+
 
 AppDataSource.initialize().then(async () => {
 
@@ -33,6 +36,8 @@ AppDataSource.initialize().then(async () => {
     app.use(studentroutes)
     app.use(TeacherRoutes)
     app.use(newuserRoutes)
+    app.use(libraryRoutes)
+    app.use(employeRoutes)
     //all handle routes
     app.use('/doc',swaggerUiExpress.serve,swaggerUiExpress.setup(swaggerFile))
     

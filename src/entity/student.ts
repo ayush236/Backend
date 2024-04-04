@@ -1,4 +1,5 @@
-import {Entity,PrimaryGeneratedColumn,Column, DeleteDateColumn, CreateDateColumn, UpdateDateColumn} from 'typeorm'
+import {Entity,PrimaryGeneratedColumn,Column, DeleteDateColumn, CreateDateColumn, UpdateDateColumn, OneToMany} from 'typeorm'
+import { employe } from './employe'
 
 @Entity()
 export class Student{
@@ -26,6 +27,9 @@ createdate:Date
 
 @UpdateDateColumn()
 updatedate:Date
+
+@OneToMany(()=>employe,(employe)=>employe.student,{cascade:true})
+employe:employe
 
 
 
