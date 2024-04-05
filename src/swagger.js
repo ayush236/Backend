@@ -37,7 +37,8 @@ const doc = {
         }
         
     },
-    host: 'localhost:3000'
+    // host: 'localhost:3000'
+    host :'backend-455k.onrender.com'
 }
 
 
