@@ -4,7 +4,6 @@ import { Student } from '../entity/student'
 import { json } from 'stream/consumers'
 import { AppError } from '../utils/AppError'
 import { error } from 'console'
-import { put } from "@vercel/blob";
 import SendMail from '../utils/mail'
 import HTML_template from '../view/mailtemplate'
 import { send } from 'process'

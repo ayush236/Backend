@@ -5,7 +5,6 @@ import { json } from "stream/consumers";
 import { AppError } from "../utils/AppError";
 import { RequestListener } from "http";
 import { error } from 'console';
-import { put } from "@vercel/blob";
 import { Student } from '../entity/student';
 
 const TeacherRepo =AppDataSource.getRepository(teacher)

@@ -19,7 +19,7 @@ export class employe {
     @Column()
     salary: number
 
-    @ManyToOne(()=>Student,(Student)=>Student.employe)
+    @ManyToOne(()=>Student,(Student)=>Student.employe,)
     student:Student
 
 }
