@@ -8,6 +8,8 @@ import * as jwt from "jsonwebtoken"
 
 
 const newuserRespo = AppDataSource.getRepository(newuser)
+// #swagger.tags=['newuser']
+
 
 export  const postdata1 =async(req:Request,res:Response,next:NextFunction)=>{
 

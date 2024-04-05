@@ -43,7 +43,7 @@ const doc = {
 
 const outputfile = './swagger-outputfile.json'
 
-const routes = ['./routes/student.routes.ts','./routes/teacher.routes.ts']
+const routes = ['./routes/student.routes.ts','./routes/teacher.routes.ts','./routes/employe.routes.ts','./routes/libray.routes.ts','./routes/vehicle.routes.ts']
 
 
 

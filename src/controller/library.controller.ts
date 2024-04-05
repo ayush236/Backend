@@ -7,8 +7,13 @@ import { Student } from '../entity/student'
 
 const libraryRepo = AppDataSource.getRepository(library)
 const StudentRepo = AppDataSource.getRepository(Student)
+// #swagger.tags=['library']
+
 
 export const getdata_first = async(req: Request ,res:Response,next:NextFunction)=>{
+// #swagger.tags=['library']
+
+
     try{
         await libraryRepo.find({
             relations:{
@@ -31,6 +36,8 @@ export const getdata_first = async(req: Request ,res:Response,next:NextFunction)
 }
 
 export const postdata_first = async(req:Request, res:Response, next:NextFunction)=>{
+// #swagger.tags=['library']
+
     try{
 
       let student=  await StudentRepo.findOneBy({id:req.body.student})
@@ -54,6 +61,8 @@ export const postdata_first = async(req:Request, res:Response, next:NextFunction
 }
 
 export const deletedata_first =async(req:Request, res:Response, next:NextFunction)=>{
+// #swagger.tags=['library']
+
 
     try{
         let data = await libraryRepo.findOneBy({id:req.params.id})
@@ -78,6 +87,8 @@ export const deletedata_first =async(req:Request, res:Response, next:NextFunctio
 }
 
 export const updated_first= async(req:Request, res:Response, next:NextFunction)=>{
+// #swagger.tags=['library']
+
 
     try{
         await libraryRepo.findOneBy({id:req.params.id})

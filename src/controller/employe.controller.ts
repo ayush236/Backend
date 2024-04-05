@@ -1,16 +1,25 @@
 import * as express from 'express'
-import { Request,Response, NextFunction } from 'express'
+import { Request ,Response, NextFunction } from 'express'
 import { AppDataSource } from '../data-source'
 import { employe } from '../entity/employe'
 import { AppError } from '../utils/AppError'
+import { Student } from '../entity/student'
 
 const employeRepo = AppDataSource.getRepository(employe)
+const StudentRepo = AppDataSource.getRepository(Student)
+// #swagger.tags=['employe']
+
 
 export const getdata_second=async(req:Request,res:Response,next:NextFunction)=>{
+// #swagger.tags=['employe']
 
 
     try{
-        await employeRepo.find().then(result=>{
+        await employeRepo.find({
+            relations:{
+                student:true
+            }
+        }).then(result=>{
             res.status(200).json({
                 message:"dat has been fetch, greate success!",
                 data:result
@@ -26,6 +35,8 @@ export const getdata_second=async(req:Request,res:Response,next:NextFunction)=>{
 }
 
 export const postdata_second = async(req:Request, res:Response, next:NextFunction)=>{
+// #swagger.tags=['employe']
+
 
     try{
         req.body.student=[req.body.student]
@@ -35,7 +46,7 @@ export const postdata_second = async(req:Request, res:Response, next:NextFunctio
                 data:result
             })
         }).catch(error=>{
-            next (new AppError(400,"something is wrong"))
+            next (new AppError(400,"something is wrong while posting data"))
         })
     }
     catch(error){
@@ -44,6 +55,8 @@ export const postdata_second = async(req:Request, res:Response, next:NextFunctio
 }
 
 export const deletedata_second = async(req:Request,res:Response,next:NextFunction)=>{
+// #swagger.tags=['employe']
+
 
      try{
 
@@ -64,6 +77,8 @@ export const deletedata_second = async(req:Request,res:Response,next:NextFunctio
 }
 
 export const updatedata_second = async(req:Request, res:Response, next:NextFunction)=>{
+// #swagger.tags=['employe']
+
 
     try{
         await employeRepo.findOneBy({id:req.params.id}).then(result=>{

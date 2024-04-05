@@ -15,6 +15,7 @@ import { error } from "console"
 import * as swaggerFile from './swagger-outputfile.json'
 import * as swaggerUiExpress from 'swagger-ui-express'
 import libraryRoutes from "./routes/libray.routes"
+import  vehicleRoutes  from "./routes/vehicle.routes"
 
 
 AppDataSource.initialize().then(async () => {
@@ -38,6 +39,7 @@ AppDataSource.initialize().then(async () => {
     app.use(newuserRoutes)
     app.use(libraryRoutes)
     app.use(employeRoutes)
+    app.use(vehicleRoutes)
     //all handle routes
     app.use('/doc',swaggerUiExpress.serve,swaggerUiExpress.setup(swaggerFile))
     
